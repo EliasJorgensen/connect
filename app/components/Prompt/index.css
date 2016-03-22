@@ -1,0 +1,17 @@
+.centerBothAxis {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.roomFormContainer {
+  width: 30vw;
+  padding: 2em;
+}
+
+.text-center {
+  font-weight: 400;
+  text-align: center;
+}

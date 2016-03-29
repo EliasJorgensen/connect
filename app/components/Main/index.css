@@ -18,3 +18,7 @@ html, body {
 .accent {
   color: #ff5177;
 }
+
+h1 {
+  font-weight: 400;
+}

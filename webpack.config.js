@@ -1,5 +1,6 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack           = require('webpack'),
+    HtmlWebpackPlugin = require('html-webpack-plugin'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/app/index.html',
@@ -8,9 +9,12 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
+  devtool: 'eval',
   entry: [
-    'babel-polyfill',
-    './app/index.js'
+    'webpack-dev-server/client?http://0.0.0.0:8080', // WebpackDevServer host and port
+    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+    'babel-polyfill', // allow JS Stage 3 features (mainly asyc/await)
+    './app/index'
   ],
   output: {
     path: __dirname + '/dist',
@@ -22,12 +26,13 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader" },
+      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] },
       { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') }
     ]
   },
   plugins: [
     new ExtractTextPlugin('app.css'),
     HTMLWebpackPluginConfig,
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

@@ -12,7 +12,7 @@ const styles = {
   buttonColor: Colors.indigoA200,
 };
 
-const Prompt = (props) => (
+const Prompt = (props) => {
   <main className="centerBothAxis">
     <Paper className="roomFormContainer" rounded={false}>
       <h2 className="text-center">{props.header}</h2>
@@ -42,7 +42,7 @@ const Prompt = (props) => (
       </form>
     </Paper>
   </main>
-);
+};
 
 Prompt.propTypes = {
   onSubmit:          PropTypes.func.isRequired,

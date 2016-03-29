@@ -35,10 +35,10 @@ class PromptContainer extends Component {
       nicknameErrorText: ''
     });
 
+    console.log("Form submitted:", this.state.room, this.state.nickname);
+
     // push user to Room route
     this.context.router.push(`/room/${room}`);
-
-    console.log("Form submitted:", this.state.room, this.state.nickname);
   }
 
   // handle update of Room input field
@@ -92,6 +92,10 @@ class PromptContainer extends Component {
         nicknameErrorText={this.state.nicknameErrorText} />
     )
   }
+}
+
+PromptContainer.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default PromptContainer;

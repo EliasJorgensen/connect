@@ -10,7 +10,12 @@ class RoomContainer extends Component {
   }
 
   render () {
-    <Room/>
+    const { id } = this.props.routeParams;
+
+    return (
+      <Room
+      id={id} />
+    )
   }
 }
 

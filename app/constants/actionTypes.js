@@ -1,1 +1,1 @@
-export const SAVE_USERNAME = 'SAVE_USERNAME';
+export const UPDATE_NICKNAME = 'UPDATE_NICKNAME';

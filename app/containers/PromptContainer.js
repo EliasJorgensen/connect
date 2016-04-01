@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from 'actions';
+
+// import presentational component
 import Prompt from 'components/Prompt';
 
 class PromptContainer extends Component {
+
   constructor () {
     super();
-    // use PureRenderMixin
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
 
-    // set initial state
     this.state = {
-      room:              '',
-      nickname:          '',
-      roomErrorText:     '',
+      room: '',
+      nickname: '',
+      roomErrorText    : '',
       nicknameErrorText: ''
     }
   }
@@ -83,9 +85,9 @@ class PromptContainer extends Component {
     return (
       <Prompt
         header="Access Connect"
-        onSubmit={(e) => this.handleSubmit(e)}
-        onRoomUpdate={(e) => this.handleRoomUpdate(e)}
-        onNicknameUpdate={(e) => this.handleNickNameUpdate(e)}
+        onSubmit={(e) => this.updateNickname(e)}
+        onRoomUpdate={(e) => this.updateNickname(e)}
+        onNicknameUpdate={(e) => this.updateNickname(e)}
         room={this.state.room}
         nickname={this.state.nickname}
         roomErrorText={this.state.roomErrorText}
@@ -94,8 +96,26 @@ class PromptContainer extends Component {
   }
 }
 
-PromptContainer.contextTypes = {
-  router: React.PropTypes.object.isRequired
+PromptContainer.propTypes = {
+  actions: PropTypes.object.isRequired,
+  state:   PropTypes.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    state: state.promptState
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
 }
 
 export default PromptContainer;
+
+/*
+const deprecatedShit = {
+
+}; */

@@ -1,5 +1,5 @@
-import { SAVE_USERNAME } from './actionTypes.js';
+import * as types from 'constants/actionTypes.js';
 
-export saveFuelSettings (username) {
-  return { type: SAVE_USERNAME, username: username };
+export function updateUsername (username) {
+  return { type: UPDATE_USERNAME, username: username };
 }

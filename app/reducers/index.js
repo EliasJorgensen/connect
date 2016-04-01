@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
 // import reducers
-import userReducer from './userReducer';
+import promptState from './promptReducer';
 
 const rootReducer = combineReducers({
-  userReducer
+  promptState
 });
 
 export default rootReducer;

@@ -1,4 +1,5 @@
 # [Connect](https://connect.eliasjorgensen.me)
+___
 Connect is a P2P video conferencing web-app.
 
 It makes use of the following technologies:
@@ -20,7 +21,10 @@ It makes use of the following technologies:
 2. **Clone the repo** (or download a zip). `git clone https://github.com/EliasJorgensen/connect.git`.
 3. **Install Dependencies**. `npm install` from the cloned directory.
 4. **Run the web-app**. `npm start`.
-5. See **package.json** for a full list of commands.
+
+### Full list of commands:
+* `npm start` - Run webpack-dev-server
+* `npm run dist` - Compiles production ready build and places it in /dist.
 
 
 ## Initial Machine Setup

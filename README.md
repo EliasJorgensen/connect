@@ -1,5 +1,4 @@
 # [Connect](https://connect.eliasjorgensen.me)
-___
 Connect is a P2P video conferencing web-app.
 
 It makes use of the following technologies:

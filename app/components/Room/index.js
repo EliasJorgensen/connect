@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
 
 const Room = (props) => (
-  <h1 className="lighter">Room ID is: {props.id}</h1>
+  <div>
+    <h1 className="lighter">Room ID is: {props.room}</h1>
+    <h1 className="lighter">Nickname is: {props.nickname}</h1>
+  </div>
 );
 
 Room.propTypes = {
-  id: PropTypes.string.isRequired,
+  room: PropTypes.string.isRequired,
+  nickname: PropTypes.string.isRequired
 };
 
 export default Room;

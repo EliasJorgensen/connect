@@ -1,22 +1,33 @@
-import React, { Component } from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+
+// import component
 import Room from 'components/Room';
 
 class RoomContainer extends Component {
-  constructor () {
-    super();
-    // use PureRenderMixin
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
-
   render () {
-    const { id } = this.props.routeParams;
-
     return (
       <Room
-      id={id} />
+      room={this.props.room}
+      nickname={this.props.nickname} />
     )
   }
 }
 
-export default RoomContainer;
+function mapStateToProps (state) {
+  return {
+    nickname: state.prompt.nickname,
+    room:     state.prompt.room
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RoomContainer);

@@ -2,18 +2,19 @@ import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 
 // import components
 import Main from 'components/Main';
 import PromptContainer from 'containers/PromptContainer';
 import RoomContainer from 'containers/RoomContainer';
 
-// import reducers
+// import rootReducer
 import rootReducer from 'reducers';
 
-// create store
-const store = createStore(rootReducer);
+// create store from reducers and middleware
+const middleware = routerMiddleware(browserHistory);
+const store = createStore(rootReducer, applyMiddleware(middleware));
 
 console.log('State of store is:', store.getState());
 

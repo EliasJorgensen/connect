@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
 import * as actions from 'actions';
 
 // import presentational component
@@ -8,76 +8,45 @@ import Prompt from 'components/Prompt';
 
 class PromptContainer extends Component {
 
-  constructor () {
-    super();
-
-    this.state = {
-      room: '',
-      nickname: '',
-      roomErrorText    : '',
-      nicknameErrorText: ''
-    }
-  }
-
   // handle submit event
   handleSubmit (e) {
     // prevent form from using the default blocking submit
     e.preventDefault();
 
-    const { room, nickname } = this.state;
+    const { room, nickname } = this.props.state;
 
     if (!room || !nickname) {
       this.handleError(room, nickname);
       return;
     }
 
-    // remove error formatting from input fields, if any
-    this.setState({
-      roomErrorText    : '',
-      nicknameErrorText: ''
-    });
-
-    console.log("Form submitted:", this.state.room, this.state.nickname);
+    console.log("Form submitted:", room, nickname);
 
     // push user to Room route
-    this.context.router.push(`/room/${room}`);
+    this.props.actions.pushToRoute('/room/' + room);
   }
 
   // handle update of Room input field
   handleRoomUpdate (e) {
-    this.setState({
-      room: e.target.value
-    });
+    this.props.actions.updateRoom(e.target.value);
   }
 
   // handle update of Nickname input field
-  handleNickNameUpdate (e) {
-    this.setState({
-      nickname: e.target.value
-    });
+  handleNicknameUpdate (e) {
+    this.props.actions.updateNickname(e.target.value);
   }
 
   handleError (room, nickname) {
     if (!room) {
-      console.log('Room is missing');
-      this.setState({
-        roomErrorText: 'Room is missing'
-      });
+      this.props.actions.setRoomError(true);
     } else {
-      this.setState({
-        roomErrorText: ''
-      });
+      this.props.actions.setRoomError(false);
     }
 
     if (!nickname) {
-        console.log('Nickname is missing');
-        this.setState({
-          nicknameErrorText: 'Nickname is missing'
-        });
+      this.props.actions.setNicknameError(true);
     } else {
-      this.setState({
-        nicknameErrorText: ''
-      });
+      this.props.actions.setNicknameError(false);
     }
   }
 
@@ -85,13 +54,13 @@ class PromptContainer extends Component {
     return (
       <Prompt
         header="Access Connect"
-        onSubmit={(e) => this.updateNickname(e)}
-        onRoomUpdate={(e) => this.updateNickname(e)}
-        onNicknameUpdate={(e) => this.updateNickname(e)}
-        room={this.state.room}
-        nickname={this.state.nickname}
-        roomErrorText={this.state.roomErrorText}
-        nicknameErrorText={this.state.nicknameErrorText} />
+        onSubmit={(e) => this.handleSubmit(e)}
+        onRoomUpdate={(e) => this.handleRoomUpdate(e)}
+        onNicknameUpdate={(e) => this.handleNicknameUpdate(e)}
+        room={this.props.state.room}
+        nickname={this.props.state.nickname}
+        roomError={this.props.state.roomError}
+        nicknameError={this.props.state.nicknameError} />
     )
   }
 }
@@ -103,19 +72,33 @@ PromptContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    state: state.promptState
+    state: state.prompt
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: {
+      updateNickname: (nickname) => {
+        dispatch(actions.updateNickname(nickname));
+      },
+      updateRoom: (room) => {
+        dispatch(actions.updateRoom(room));
+      },
+      setRoomError: (bool) => {
+        dispatch(actions.setRoomError(bool));
+      },
+      setNicknameError: (bool) => {
+        dispatch(actions.setNicknameError(bool));
+      },
+      pushToRoute: (route) => {
+        dispatch(push(route));
+      }
+    }
   };
 }
 
-export default PromptContainer;
-
-/*
-const deprecatedShit = {
-
-}; */
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PromptContainer);

@@ -22,7 +22,7 @@ const Prompt = (props) => (
             underlineFocusStyle={styles.underlineStyle}
             onChange={props.onRoomUpdate}
             value={props.room}
-            errorText={props.roomErrorText} />
+            errorText={props.roomError ? 'Room is missing' : ''} />
           <br/><br/>
           <TextField
             hintText="Nickname"
@@ -30,7 +30,7 @@ const Prompt = (props) => (
             underlineFocusStyle={styles.underlineStyle}
             onChange={props.onNicknameUpdate}
             value={props.nickname}
-            errorText={props.nicknameErrorText} />
+            errorText={props.nicknameError ? 'Nickname is missing' : ''} />
           <br/><br/><br/>
           <RaisedButton
             label="Enter"
@@ -44,14 +44,14 @@ const Prompt = (props) => (
 );
 
 Prompt.propTypes = {
-  onSubmit:          PropTypes.func.isRequired,
-  onRoomUpdate:      PropTypes.func.isRequired,
-  onNicknameUpdate:  PropTypes.func.isRequired,
-  room:              PropTypes.string.isRequired,
-  nickname:          PropTypes.string.isRequired,
-  header:            PropTypes.string.isRequired,
-  roomErrorText:     PropTypes.string,
-  nicknameErrorText: PropTypes.string,
+  onSubmit:         PropTypes.func.isRequired,
+  onRoomUpdate:     PropTypes.func.isRequired,
+  onNicknameUpdate: PropTypes.func.isRequired,
+  room:             PropTypes.string.isRequired,
+  nickname:         PropTypes.string.isRequired,
+  header:           PropTypes.string.isRequired,
+  roomError:        PropTypes.bool,
+  nicknameError:    PropTypes.bool,
 };
 
 export default Prompt;

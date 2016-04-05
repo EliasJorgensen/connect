@@ -1,7 +1,7 @@
 {
   "name": "connect",
   "version": "1.0.0",
-  "description": "A Peer to Peer communication web-app.",
+  "description": "A minimalistic, non distracting, chat web-app.",
   "main": "index.js",
   "dependencies": {
     "express": "^4.13.4",

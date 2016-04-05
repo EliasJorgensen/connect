@@ -1,5 +1,5 @@
 # [Connect](https://connect.eliasjorgensen.me)
-Connect is a P2P video conferencing web-app.
+Connect is a minimalistic, non distracting, chat web-app made with React and Socket.io
 
 It makes use of the following technologies:
 
@@ -13,15 +13,15 @@ It makes use of the following technologies:
 | [Babel](http://babeljs.io) |  Compiles ES6 to ES5. Enjoy the new version of JavaScript today.     |
 | [ExpressJS](http://expressjs.com/) | Fast and minimalistic web framework for NodeJS |
 | [Socket.io](http://socket.io/) | Enables real-time bidirectional event-based communication. |
-| [WebRTC](https://webrtc.org/) | Enables Real Time Communication directly in the browser, via a built-in JavaScript API.
 
 ## Get started
 1. [**Initial Machine Setup**](https://github.com/EliasJorgensen/connect#initial-machine-setup). Only do this if you haven't used NodeJS before.
 2. **Clone the repo** (or download a zip). `git clone https://github.com/EliasJorgensen/connect.git`.
-3. **Install Dependencies**. `npm install` from the cloned directory.
-4. **Run the web-app**. `npm start`.
+3. **Navigate** to the cloned repository from a terminal/command prompt.
+4. **Install Dependencies**. `npm install` from the cloned directory.
+5. **Run the web-app**. `npm start`.
 
-### Full list of commands:
+### Full list of available commands:
 * `npm start` - Run webpack-dev-server
 * `npm run dist` - Compiles production ready build and places it in /dist.
 

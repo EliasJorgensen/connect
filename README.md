@@ -22,7 +22,7 @@ It makes use of the following technologies:
 5. **Run the web-app**. `npm start`.
 
 ### Full list of available commands:
-* `npm start` - Run webpack-dev-server
+* `npm run dev`  - Run [HMR](https://webpack.github.io/docs/hot-module-replacement.html) enabled dev server
 * `npm run dist` - Compiles production ready build and places it in /dist.
 
 

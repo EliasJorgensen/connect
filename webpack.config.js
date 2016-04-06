@@ -13,8 +13,7 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
   devtool: 'eval',
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client',
+    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     'babel-polyfill', // allow JS Stage 3 features (mainly asyc/await)
     './app/index'
   ],

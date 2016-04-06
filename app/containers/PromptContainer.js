@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import * as actions from 'actions';
+import io from 'socket.io-client';
 
 // import presentational component
 import Prompt from 'components/Prompt';
@@ -48,6 +49,10 @@ class PromptContainer extends Component {
     } else {
       this.props.actions.setNicknameError(false);
     }
+  }
+
+  componentDidMount () {
+    let socket = io.connect({ path: '/api' });
   }
 
   render () {

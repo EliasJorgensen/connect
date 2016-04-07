@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
@@ -13,8 +14,8 @@ import RoomContainer from 'containers/RoomContainer';
 import rootReducer from 'reducers';
 
 // create store from reducers and middleware
-const middleware = routerMiddleware(browserHistory);
-const store = createStore(rootReducer, applyMiddleware(middleware));
+const middleware = applyMiddleware(routerMiddleware(browserHistory), thunk);
+let store = createStore(rootReducer, middleware);
 
 console.log('State of store is:', store.getState());
 

@@ -13,6 +13,7 @@
     "react-router-redux": "^4.0.1",
     "react-tap-event-plugin": "^0.2.2",
     "redux": "^3.3.1",
+    "redux-thunk": "^2.0.1",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5"
   },
@@ -33,7 +34,7 @@
   },
   "scripts": {
     "dist": "webpack -p",
-    "dev": "node startServer.js"
+    "start": "node startServer.js"
   },
   "repository": {
     "type": "git",

@@ -24,8 +24,22 @@ module.exports = function (PORT) {
   // start websocket server
   var io = require('socket.io')(server, { path: '/api' });
 
+  // dummy room object for testing purposes
+  var rooms = {
+    testRoom: {
+      users: [
+        "Elias",
+        "Aksel"
+      ]
+    }
+  };
+
   io.on('connection', function (socket) {
-    console.log('User connected');
+    console.log('User connected!');
+  });
+
+  io.on('disconnect', function (socket) {
+    console.log('User disconnected!');
   });
 
 

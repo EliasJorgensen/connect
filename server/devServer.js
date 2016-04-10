@@ -16,7 +16,8 @@ module.exports = function (PORT) {
     publicPath: config.output.publicPath,
     hot: true, // this is the important part for hot reloading the components
     historyApiFallback: true,
-    stats: { colors: true }
+    stats: { colors: true },
+    contentBase: "http://localhost:" + (PORT - 1)
 
   });
 

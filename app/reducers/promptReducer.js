@@ -7,7 +7,8 @@ const initialState = {
   roomMissing:      false,
   roomReserved:     false,
   nicknameError:    false,
-  nicknameReserved: false
+  nicknameReserved: false,
+  nicknameDisabled: true
 };
 
 export default function promptReducer(state = initialState, action) {

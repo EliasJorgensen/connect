@@ -56,12 +56,14 @@ class PromptContainer extends Component {
         header="Access Connect"
         onSubmit={(e) => this.handleSubmit(e)}
         onRoomUpdate={(e) => this.handleRoomUpdate(e)}
-        onNicknameUpdate={(e) => this.handleNicknameUpdate(e)}
         room={this.props.state.room}
-        nickname={this.props.state.nickname}
         roomError={this.props.state.roomError}
         roomReserved={this.props.state.roomReserved}
-        nicknameError={this.props.state.nicknameError} />
+        onNicknameUpdate={(e) => this.handleNicknameUpdate(e)}
+        nickname={this.props.state.nickname}
+        nicknameError={this.props.state.nicknameError}
+        nicknameReserved={this.props.state.nicknameReserved}
+        nicknameDisabled={this.props.state.nicknameDisabled} />
     )
   }
 }
@@ -82,6 +84,7 @@ function mapDispatchToProps(dispatch) {
     actions: {
       updateNickname: (nickname) => {
         dispatch(actions.updateNickname(nickname));
+        dispatch(actions.asyncCheckNickname(nickname));
       },
       updateRoom: (room) => {
         dispatch(actions.updateRoom(room));

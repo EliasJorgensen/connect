@@ -51,10 +51,6 @@ class PromptContainer extends Component {
     }
   }
 
-  componentDidMount () {
-    let socket = io.connect({ path: '/api' });
-  }
-
   render () {
     return (
       <Prompt

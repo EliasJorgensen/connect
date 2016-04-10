@@ -2,8 +2,7 @@
 
 // import requirements
 var express = require('express'),
-    path    = require('path'),
-    config  = require('./config.json');
+    path    = require('path');
 
 module.exports = function (PORT) {
 

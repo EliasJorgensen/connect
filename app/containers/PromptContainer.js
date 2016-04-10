@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import * as actions from 'actions';
-import io from 'socket.io-client';
 
 // import presentational component
 import Prompt from 'components/Prompt';
@@ -61,6 +60,7 @@ class PromptContainer extends Component {
         room={this.props.state.room}
         nickname={this.props.state.nickname}
         roomError={this.props.state.roomError}
+        roomReserved={this.props.state.roomReserved}
         nicknameError={this.props.state.nicknameError} />
     )
   }
@@ -85,6 +85,7 @@ function mapDispatchToProps(dispatch) {
       },
       updateRoom: (room) => {
         dispatch(actions.updateRoom(room));
+        dispatch(actions.asyncCheckRoom(room));
       },
       setRoomError: (bool) => {
         dispatch(actions.setRoomError(bool));

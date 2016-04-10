@@ -22,7 +22,7 @@ const Prompt = (props) => (
             underlineFocusStyle={styles.underlineStyle}
             onChange={props.onRoomUpdate}
             value={props.room}
-            errorText={props.roomError ? 'Room is missing' : ''} />
+            errorText={props.roomReserved ? 'Room is reserved' : ''} />
           <br/><br/>
           <TextField
             hintText="Nickname"
@@ -51,7 +51,9 @@ Prompt.propTypes = {
   nickname:         PropTypes.string.isRequired,
   header:           PropTypes.string.isRequired,
   roomError:        PropTypes.bool,
+  roomReserved:     PropTypes.bool,
   nicknameError:    PropTypes.bool,
+  nicknameReserved: PropTypes.bool,
 };
 
 export default Prompt;

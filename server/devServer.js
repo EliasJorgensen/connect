@@ -18,7 +18,6 @@ module.exports = function (PORT) {
     historyApiFallback: true,
     stats: { colors: true },
     contentBase: "http://localhost:" + (PORT - 1)
-
   });
 
   front_server.listen(PORT, 'localhost', function (err, res) {

@@ -1,8 +1,9 @@
 'use strict'; // Use strict mode for better performance and feature support
 
 // import requirements
-var express = require('express'),
-    path    = require('path');
+var express  = require('express'),
+    path     = require('path'),
+    socketio = require('socket.io');
 
 module.exports = function (PORT) {
 
@@ -21,32 +22,46 @@ module.exports = function (PORT) {
 
   /*------------------ Socket.io code ------------------*/
   // start websocket server
-  var io = require('socket.io')(server, { path: '/api' });
+  var io = socketio(server, { path: '/api' });
 
   // dummy room object for testing purposes
   var rooms = {
     testRoom: {
       users: [
         "Elias",
-        "Aksel"
+        "Aksel",
       ]
     }
   };
 
-  io.on('connection', function (socket) {
-    console.log('User connected!');
+  io.on('connection', function(socket) {
+      console.info('New client connected (id=' + socket.id + ').');
+      socket.emit('welcome', "Connected to socket server")
+
+      // let user check for reserved rooms
+      socket.on('roomCheck', function (room, cb) {
+        if (room in rooms) {
+          cb(true);
+        } else {
+          cb(false);
+        }
+      });
+
+      // let user check for reserved nicknameReserved
+      socket.on('nicknameCheck', function (name, room, cb) {
+        if (!(room in rooms)) { cb(false); }
+
+        if (rooms[room]["users"].indexOf(name) !== -1) {
+          cb(true);
+        } else {
+          cb(false);
+        }
+      });
+
+      // When socket disconnects, remove it from the list:
+      socket.on('disconnect', function() {
+          console.info('Client gone (id=' + socket.id + ').');
+      });
   });
 
-  io.on('disconnect', function (socket) {
-    console.log('User disconnected!');
-  });
-
-
-  // io.on('connection', function (data) {
-  //   data.emit('message', { message: 'welcome to the chat' });
-  //
-  //   data.on('send', function (data) {
-  //       io.emit('message', data);
-  //   });
-  // });
 }

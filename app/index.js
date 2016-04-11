@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 
 import Main from 'components/Main';
@@ -13,12 +13,12 @@ import RoomContainer from 'containers/RoomContainer';
 import rootReducer from 'reducers';
 
 // create store from reducers and middleware
-const middleware = applyMiddleware(routerMiddleware(browserHistory), thunk);
+const middleware = applyMiddleware(routerMiddleware(hashHistory), thunk);
 let store = createStore(rootReducer, middleware);
 console.info('State of store is:', store.getState());
 
 // create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 // define routes
 const routes = (

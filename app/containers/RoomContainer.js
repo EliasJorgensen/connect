@@ -14,10 +14,10 @@ class RoomContainer extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   return {
     nickname: state.prompt.nickname,
-    room:     state.prompt.room
+    room:     ownProps.params.id,
   };
 }
 

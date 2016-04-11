@@ -11,6 +11,11 @@ module.exports = function (PORT) {
   var app = express(); // create server instance
   app.use('/', express.static(path.join(__dirname, '../dist'))); // serve dist folder
 
+  // handle unknown route
+  app.get('*', function (req, res) {
+    res.send('Sorry mate, you got the 404');
+  });
+
   var server = app.listen(PORT, function (err) {
     if (err) {
       console.log('Problem with starting HTTP server', err);

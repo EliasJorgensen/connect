@@ -24,7 +24,7 @@ It makes use of the following technologies:
 3. **Navigate** to the cloned repository from a terminal/command prompt.
 4. **Install Dependencies**. `npm install` from the cloned directory.
 5. **Run the web-app**. `npm start`.
-6. **Navigate to** `http://localhost:8080/webpack-dev-server/`
+6. **Navigate to** `http://localhost:8080/`
 
 ### Full list of available commands:
 * `npm run start`  - Run [HMR](https://webpack.github.io/docs/hot-module-replacement.html) enabled dev server

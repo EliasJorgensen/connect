@@ -1,0 +1,7 @@
+.user-list {
+  height: 100vh;
+  width: 200px;
+  padding: 0px;
+  overflow-y: auto;
+  overflow-x:hidden;
+}

@@ -36,7 +36,7 @@ class Prompt extends Component {
   render () {
     return (
       <main className="centerBothAxis">
-        <Paper className="roomFormContainer" rounded={false}>
+        <Paper className="roomFormContainer">
           <h2 className="text-center">{this.props.header}</h2>
           <form onSubmit={this.props.onSubmit} id="Prompt">
             <TextField

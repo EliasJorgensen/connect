@@ -1,5 +1,5 @@
 import { UPDATE_NICKNAME, UPDATE_ROOM, SET_NICKNAME_ERROR, SET_ROOM_ERROR,
-         SET_ROOM_RESERVED, SET_NICKNAME_RESERVED } from 'constants/actionTypes';
+         SET_ROOM_RESERVED, SET_NICKNAME_RESERVED, SET_NICKNAME_DISABLED } from 'constants/actionTypes';
 
 const initialState = {
   room:             '',
@@ -42,7 +42,12 @@ export default function promptReducer(state = initialState, action) {
     case SET_NICKNAME_RESERVED:
       return Object.assign({}, state, {
         nicknameReserved: action.value
-      })
+      });
+
+    case SET_NICKNAME_DISABLED:
+      return Object.assign({}, state, {
+        nicknameDisabled: action.value
+      });
 
     default:
       return state;

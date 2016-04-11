@@ -12,10 +12,33 @@ socket.on("welcome", (message) => {
 /*------------------ Async action creators ------------------*/
 
 export function asyncCheckRoom (room) {
+  // when room is empty, room is NOT reserved
+  if (!room) {
+    return (dispatch) => {
+      dispatch(checkRoom(false));
+    }
+  }
+
   return (dispatch) => {
     socket.emit('roomCheck', room, function (bool) {
       console.info('Room ' + room + " returned: " + bool);
       dispatch(checkRoom(bool));
+    });
+  }
+}
+
+export function asyncCheckNickname (nickname, room) {
+  // when nickname or room is empty, nickname is NOT in use
+  if (!nickname || !room) {
+    return (dispatch) => {
+      dispatch(checkNickname(false));
+    }
+  }
+
+  return (dispatch) => {
+    socket.emit('nicknameCheck', nickname, room, function (bool) {
+      console.info('Nickname ' + nickname + " in room " + room + " returned: " + bool);
+      dispatch(checkNickname(bool));
     });
   }
 }
@@ -39,4 +62,12 @@ export function updateNickname (nickname) {
 
 export function setNicknameError (bool) {
   return { type: types.SET_NICKNAME_ERROR, value: bool };
+}
+
+export function setNicknameDisabled (bool) {
+  return { type: types.SET_NICKNAME_DISABLED, value: bool };
+}
+
+export function checkNickname (bool) {
+  return { type: types.SET_NICKNAME_RESERVED, value: bool };
 }

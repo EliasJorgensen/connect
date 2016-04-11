@@ -13,11 +13,13 @@ class PromptContainer extends Component {
     // prevent form from using the default blocking submit
     e.preventDefault();
 
-    const { room, nickname } = this.props.state;
+    const { room, nickname, nicknameReserved } = this.props.state;
 
     if (!room || !nickname) {
       this.handleError(room, nickname);
       return;
+    } else if (nicknameReserved) {
+      return; // refuse to submit when nickname is already in use in current room
     }
 
     console.log("Form submitted:", room, nickname);
@@ -26,14 +28,29 @@ class PromptContainer extends Component {
     this.props.actions.pushToRoute('/room/' + room);
   }
 
-  // handle update of Room input field
+  // handle update of Room input field (also check nickname)
   handleRoomUpdate (e) {
     this.props.actions.updateRoom(e.target.value);
+
+    // handle disabled nickname input - and check server if nickname is in use
+    if (e.target.value !== "") {
+      this.props.actions.setNicknameDisabled(false);
+      // only check nickname if it isn't empty
+      if (this.props.state.nickname !== "") {
+        this.props.actions.checkNickname(this.props.state.nickname, e.target.value);
+      }
+    } else {
+      // only disable nickname if nickname is empty
+      this.props.actions.setNicknameDisabled(true);
+    }
+
+    this.props.actions.checkRoom(e.target.value);
   }
 
-  // handle update of Nickname input field
+  // handle update of Nickname input field (and check if nickname is reserved)
   handleNicknameUpdate (e) {
     this.props.actions.updateNickname(e.target.value);
+    this.props.actions.checkNickname(e.target.value, this.props.state.room)
   }
 
   handleError (room, nickname) {
@@ -82,23 +99,30 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      updateNickname: (nickname) => {
+      updateNickname: (nickname, room) => {
         dispatch(actions.updateNickname(nickname));
-        dispatch(actions.asyncCheckNickname(nickname));
       },
-      updateRoom: (room) => {
-        dispatch(actions.updateRoom(room));
-        dispatch(actions.asyncCheckRoom(room));
-      },
-      setRoomError: (bool) => {
-        dispatch(actions.setRoomError(bool));
+      setNicknameDisabled: (bool) => {
+        dispatch(actions.setNicknameDisabled(bool));
       },
       setNicknameError: (bool) => {
         dispatch(actions.setNicknameError(bool));
       },
+      checkNickname: (nickname, room) => {
+        dispatch(actions.asyncCheckNickname(nickname, room));
+      },
+      updateRoom: (room) => {
+        dispatch(actions.updateRoom(room));
+      },
+      setRoomError: (bool) => {
+        dispatch(actions.setRoomError(bool));
+      },
+      checkRoom: (room) => {
+        dispatch(actions.asyncCheckRoom(room));
+      },
       pushToRoute: (route) => {
         dispatch(push(route));
-      }
+      },
     }
   };
 }

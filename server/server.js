@@ -49,7 +49,8 @@ module.exports = function (PORT) {
 
       // let user check for reserved nicknameReserved
       socket.on('nicknameCheck', function (name, room, cb) {
-        if (!(room in rooms)) { cb(false); }
+        // if room doesn't exist, nickname is free to use
+        if (!(room in rooms)) { cb(false); return; }
 
         if (rooms[room]["users"].indexOf(name) !== -1) {
           cb(true);

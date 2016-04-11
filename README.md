@@ -1,4 +1,4 @@
-# [Connect](https://connect.eliasjorgensen.me)
+# Connect
 Connect is a minimalistic, non distracting, chat web-app made with React and Socket.io
 
 It makes use of the following technologies:
@@ -30,8 +30,8 @@ It makes use of the following technologies:
 * `npm run start`  - Run [HMR](https://webpack.github.io/docs/hot-module-replacement.html) enabled dev server
 * `npm run dist` - Compiles production ready build and places it in /dist.
 
-## Running in production
+## Running in production mode
 1. Install Dependencies
 2. Run `npm run dist`
-3. Set environment variables NODE_ENV to "production" and PORT to the port of your choice
-4. Run `npm start` with PM2 or whatever you like using :)
+3. Set environment variables NODE_ENV to "production" and PORT to the port of your choice (probably 80)
+4. Run `npm start`.

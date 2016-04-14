@@ -6,7 +6,8 @@ import UserList from 'components/UserList';
 const Room = (props) => (
   <div>
     <UserList
-      header="Users in room" />
+      header="Users in room"
+      users={props.users} />
     <h1 className="lighter">Room ID is: {props.room}</h1>
     <h1 className="lighter">Nickname is: {props.nickname}</h1>
   </div>
@@ -14,7 +15,8 @@ const Room = (props) => (
 
 Room.propTypes = {
   room: PropTypes.string.isRequired,
-  nickname: PropTypes.string.isRequired
+  nickname: PropTypes.string.isRequired,
+  users: PropTypes.array.isRequired
 };
 
 export default Room;

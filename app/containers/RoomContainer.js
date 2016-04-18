@@ -5,9 +5,18 @@ import { connect } from 'react-redux';
 import Room from 'components/Room';
 
 const users = [
-  "Elias",
-  "Aksel",
-  "Someone"
+  {
+    nickname:'Elias',
+    id: 1
+  },
+  {
+    nickname:'Someone',
+    id: 2
+  },
+  {
+    nickname:'Aksel',
+    id: 3
+  },
 ];
 
 class RoomContainer extends Component {

@@ -14,7 +14,10 @@ import rootReducer from 'reducers';
 
 // create store from reducers and middleware
 const middleware = applyMiddleware(routerMiddleware(hashHistory), thunk);
-let store = createStore(rootReducer, middleware);
+const store = createStore(
+  rootReducer,
+  middleware
+);
 console.info('State of store is:', store.getState());
 
 // create an enhanced history that syncs navigation events with the store

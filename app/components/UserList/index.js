@@ -14,9 +14,10 @@ class UserList extends Component {
     var userNodes = this.props.users.map(user => {
       return (
         <ListItem
-          primaryText={user}
+          primaryText={user.nickname}
           disabled={true}
           leftIcon={<PersonIcon style={{ fill: green500}} />}
+          key={user.id}
         />
       );
     });

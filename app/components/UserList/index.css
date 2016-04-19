@@ -3,5 +3,6 @@
   width: 200px;
   padding: 0px;
   overflow-y: auto;
-  overflow-x:hidden;
+  overflow-x: hidden;
+  float: left;
 }

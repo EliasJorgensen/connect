@@ -1,22 +1,27 @@
 import React, { PropTypes } from 'react';
 
 // import components
-import UserList from 'components/UserList';
+import UserList  from 'components/UserList';
+import ChatBox   from 'components/ChatBox';
+import ChatInput from 'components/ChatInput';
 
 const Room = (props) => (
-  <div>
-    <UserList
-      header="Users in room"
-      users={props.users} />
-    <h1 className="lighter">Room ID is: {props.room}</h1>
-    <h1 className="lighter">Nickname is: {props.nickname}</h1>
-  </div>
+  <main>
+    <div>
+
+      <ChatBox />
+      <UserList
+        header="Users in room"
+        users={props.users} />
+      <ChatInput />
+    </div>
+  </main>
 );
 
 Room.propTypes = {
-  room: PropTypes.string.isRequired,
+  room:     PropTypes.string.isRequired,
   nickname: PropTypes.string.isRequired,
-  users: PropTypes.array.isRequired
+  users:    PropTypes.array.isRequired
 };
 
 export default Room;

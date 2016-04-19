@@ -23,7 +23,7 @@ class UserList extends Component {
     });
 
     return (
-      <Paper className="user-list">
+      <Paper className="user-list" rounded={false}>
         <List>
           <Subheader>{this.props.header}</Subheader>
 

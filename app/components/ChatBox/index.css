@@ -1,0 +1,8 @@
+.chatbox {
+  height: 93vh;
+  width: calc(100% - 200px);
+  background-color: #F5F5F5;
+  float: right;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

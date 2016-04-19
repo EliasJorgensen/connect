@@ -1,0 +1,18 @@
+.chatInputWrapper {
+  float: right;
+  height: auto;
+  width: calc(100% - 200px);
+}
+
+.chatInput {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: calc(100% - 12%);
+}
+
+.chatInputButton {
+  float: left;
+  margin-top: 5px;
+  margin-left:5px;
+}

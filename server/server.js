@@ -3,7 +3,8 @@
 // import requirements
 var express  = require('express'),
     path     = require('path'),
-    socketio = require('socket.io');
+    socketio = require('socket.io'),
+    utils    = require('./utils');
 
 module.exports = function (PORT) {
 
@@ -31,7 +32,7 @@ module.exports = function (PORT) {
 
   // dummy room object for testing purposes
   var rooms = {
-    testRoom: {
+    testroom: {
       users: [
         "Elias",
         "Aksel",
@@ -45,6 +46,8 @@ module.exports = function (PORT) {
 
       // let user check for reserved rooms
       socket.on('roomCheck', function (room, cb) {
+        room = room.toLowerCase();
+
         if (room in rooms) {
           cb(true);
         } else {
@@ -57,7 +60,7 @@ module.exports = function (PORT) {
         // if room doesn't exist, nickname is free to use
         if (!(room in rooms)) { cb(false); return; }
 
-        if (rooms[room]["users"].indexOf(name) !== -1) {
+        if (utils.searchArrayLowerCase(rooms[room]["users"], name)) {
           cb(true);
         } else {
           cb(false);

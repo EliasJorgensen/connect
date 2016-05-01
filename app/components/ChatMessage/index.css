@@ -1,0 +1,19 @@
+.chat-message {
+  min-height: 21px;
+  padding-left: 10px;
+  margin: 3px;
+}
+
+.message-author,
+.message-time {
+  font-size: 15px;
+  color: #666;
+  float: left;
+  margin-right: 6px;
+}
+
+.message-content {
+  font-size: 15px;
+  color: #000;
+  display: inline-block;
+}

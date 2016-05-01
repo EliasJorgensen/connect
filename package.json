@@ -40,7 +40,7 @@
     "type": "git",
     "url": "git+https://github.com/EliasJorgensen/connect.git"
   },
-  "author": "Elias Jørgensen <eliaszakarias@gmail.com> (http://eliasjorgensen.me)",
+  "author": "Elias Jørgensen <eliaszakarias@gmail.com> (https://eliasjorgensen.me)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/EliasJorgensen/connect/issues"

@@ -1,5 +1,11 @@
 var utils = {};
 
+/**
+ * Seaches for string in array, in lowercase.
+ * @param  {array}  arr Array to search in.
+ * @param  {String} str String to search for.
+ * @return {Bool}   True if found, False if not.
+ */
 utils.searchArrayLowerCase = function (arr, str) {
   console.log("Array: " + arr + ". String: ", str);
 

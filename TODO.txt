@@ -1,1 +1,2 @@
 Consider updating to material-ui v0.15 beta (Has breaking changes)
+Document code with DocBlocks.

@@ -2,6 +2,7 @@
   height: 92vh;
   width: calc(100% - 200px);
   background-color: #F5F5F5;
+  /* INSERT LEFT/RIGHT MARGIN */
   float: right;
   overflow-y: auto;
   overflow-x: hidden;

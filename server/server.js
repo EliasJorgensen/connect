@@ -57,6 +57,9 @@ module.exports = function (PORT) {
 
       // let user check for reserved nicknameReserved
       socket.on('nicknameCheck', function (name, room, cb) {
+        // convert room to lowercase
+        room = room.toLowerCase();
+
         // if room doesn't exist, nickname is free to use
         if (!(room in rooms)) { cb(false); return; }
 

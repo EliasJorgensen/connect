@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 // import component
 import Room from 'components/Room';
 
-const users = [
+// test array
+let users = [
   {
     nickname:'Elias',
     id: 1
@@ -19,13 +20,30 @@ const users = [
   },
 ];
 
+// test array
+let msg = [
+  {
+    date: new Date(),
+    content: 'Test Content right here bruh',
+    author: 'Elias',
+    key: 1
+  },
+  {
+    date: new Date(),
+    content: 'This is some neat stuff right here',
+    author: 'Aksel',
+    key: 2
+  }
+];
+
 class RoomContainer extends Component {
   render () {
     return (
       <Room
       room={this.props.room}
       nickname={this.props.nickname}
-      users={users} />
+      users={users}
+      messages={msg} />
     )
   }
 }

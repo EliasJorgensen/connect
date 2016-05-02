@@ -1,5 +1,5 @@
 .chatbox {
-  height: 92vh;
+  height: calc(100vh - 70px);
   width: calc(100% - 200px);
   background-color: #F5F5F5;
   /* INSERT LEFT/RIGHT MARGIN */

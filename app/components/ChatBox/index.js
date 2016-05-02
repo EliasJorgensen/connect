@@ -9,23 +9,18 @@ class ChatBox extends Component {
 
   render () {
 
-    let messages; // map over messages array and form chatMessage components
-
-    const msg = {
-      date: new Date(),
-      content: 'Test Content right here bruh',
-      author: 'Elias'
-    }
-    const msg2 = {
-      date: new Date(),
-      content: 'This is some neat stuff right here',
-      author: 'Aksel'
-    }
+    // map over messages prop and create array of ChatMessages
+    let messageNodes = this.props.messages.map(message => {
+      return (
+        <ChatMessage
+        message={message}
+        key={message.key} />
+      );
+    });
 
     return (
       <div className="chatbox">
-        <ChatMessage message={msg} />
-        <ChatMessage message={msg2} />
+        {messageNodes}
       </div>
     );
   }
@@ -33,7 +28,7 @@ class ChatBox extends Component {
 }
 
 ChatBox.propTypes = {
-
+  messages: PropTypes.array.isRequired
 };
 
 export default ChatBox;

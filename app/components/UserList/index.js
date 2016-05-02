@@ -11,7 +11,7 @@ class UserList extends Component {
 
   render () {
 
-    var userNodes = this.props.users.map(user => {
+    let userNodes = this.props.users.map(user => {
       return (
         <ListItem
           primaryText={user.nickname}

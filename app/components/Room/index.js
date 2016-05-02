@@ -5,11 +5,27 @@ import UserList  from 'components/UserList';
 import ChatBox   from 'components/ChatBox';
 import ChatInput from 'components/ChatInput';
 
+// test array
+let messages = [
+  {
+    date: new Date(),
+    content: 'Test Content right here bruh',
+    author: 'Elias',
+    key: 1
+  },
+  {
+    date: new Date(),
+    content: 'This is some neat stuff right here',
+    author: 'Aksel',
+    key: 2
+  }
+]
+
 const Room = (props) => (
   <main>
     <div>
 
-      <ChatBox />
+      <ChatBox messages={messages} />
       <UserList
         header="Users in room"
         users={props.users} />

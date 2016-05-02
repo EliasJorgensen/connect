@@ -15,7 +15,7 @@ class ChatMessage extends Component {
     minutes = (minutes < 9) ? '0' + minutes : minutes;
 
     return (
-      <ListItem disabled={true}>
+      <ListItem disabled={true} style={{paddingTop: '4px', paddingBottom: '4px'}}>
         <div className="chat-message">
           <div className="message-time">[{ hours + ':' + minutes }]</div>
           <div className="message-author">&lt;{msg.author}&gt;</div>

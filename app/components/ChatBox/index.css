@@ -6,4 +6,5 @@
   float: right;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-top: 12px;
 }

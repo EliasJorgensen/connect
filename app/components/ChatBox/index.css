@@ -2,9 +2,11 @@
   height: 92vh;
   width: calc(100% - 200px);
   background-color: #F5F5F5;
-  /* INSERT LEFT/RIGHT MARGIN */
   float: right;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-top: 12px;
+}
+
+.chatboxList {
+  padding-top: 100px;
 }

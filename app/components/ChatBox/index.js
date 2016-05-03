@@ -20,7 +20,9 @@ class ChatBox extends Component {
 
     return (
       <div className="chatbox">
-        {messageNodes}
+        <List style={{paddingTop: '10px'}}>
+          {messageNodes}
+        </List>
       </div>
     );
   }

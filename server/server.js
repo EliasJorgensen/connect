@@ -31,46 +31,61 @@ module.exports = function (PORT) {
   var io = socketio(server, { path: '/api' });
 
   // object structure visualization
-  // var rooms = {
-  //   testroom: {
-  //     users: [
-  //       "Elias",
-  //       "Aksel",
-  //     ]
-  //   }
-  // };
+  let rooms = {
+    testroom: {
+      users: [
+        "Elias",
+        "Aksel",
+      ]
+    }
+  };
 
   // our local 'database' of rooms and users
+  //let rooms = {};
 
   io.on('connection', function(socket) {
-      console.info('New client connected (id=' + socket.id + ').');
-      socket.emit('welcome', "Connected to socket server")
+      console.log("Socket connected: " + socket.id);
 
-      // let user check for reserved rooms
-      socket.on('roomCheck', function (room, cb) {
-        room = room.toLowerCase();
+      // listen for actions emitted by Client
+      socket.on('action', (action) => {
+        console.log(action);
 
-        if (room in rooms) {
-          cb(true);
-        } else {
-          cb(false);
+        if (action.type === 'api/roomCheck') {
+          let room = action.room.toLowerCase();
+          let value;
+
+          if (room in rooms) {
+            value = true;
+          } else {
+            value = false;
+          }
+          // emit value back to client
+          console.log("Checking Room: ", value);
+          socket.emit('action', {type: 'SET_ROOM_RESERVED', value: value});
         }
-      });
-      
 
-      // let user check for reserved nicknameReserved
-      socket.on('nicknameCheck', function (name, room, cb) {
-        // convert room to lowercase
-        room = room.toLowerCase();
+        else if (action.type === 'api/nicknameCheck') {
+          let room = action.room.toLowerCase();
+          let name = action.name;
+          let value;
 
-        // if room doesn't exist, nickname is free to use
-        if (!(room in rooms)) { cb(false); return; }
+          // if room doesn't exist, nickname is free to use
+          if (!(room in rooms)) {
+            socket.emit('action', {type: 'SET_NICKNAME_RESERVED', value: false});
+            return;
+          }
 
-        if (utils.searchArrayLowerCase(rooms[room]["users"], name)) {
-          cb(true);
-        } else {
-          cb(false);
+          if (utils.searchArrayLowerCase(rooms[room]["users"], name)) {
+            value = true;
+          } else {
+            value = false;
+          }
+
+          // emit value back to client
+          console.log("Checking Nickname: ", value);
+          socket.emit('action', {type: 'SET_NICKNAME_RESERVED', value: value});
         }
+
       });
 
 

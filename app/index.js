@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import createSocketMiddleware from 'redux-socket.io';
+import io from 'socket.io-client';
 import { Provider } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
@@ -13,15 +15,18 @@ import RoomContainer from 'containers/RoomContainer';
 import rootReducer from 'reducers';
 
 // create store from reducers and middleware
-const middleware = applyMiddleware(routerMiddleware(hashHistory), thunk);
-const store = createStore(
-  rootReducer,
-  middleware
-);
+let socket = io({path: '/api'});
+console.log(socket);
+let socketMiddleware = createSocketMiddleware(socket, 'api/');
+console.log(socketMiddleware);
+let store = applyMiddleware(routerMiddleware(hashHistory),
+            thunk, socketMiddleware)(createStore)(rootReducer);
+
+console.log(store);
 console.info('State of store is:', store.getState());
 
 // create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(hashHistory, store);
+let history = syncHistoryWithStore(hashHistory, store);
 
 // define routes
 const routes = (

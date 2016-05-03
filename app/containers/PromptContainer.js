@@ -99,7 +99,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      updateNickname: (nickname, room) => {
+      updateNickname: (nickname) => {
         dispatch(actions.updateNickname(nickname));
       },
       setNicknameDisabled: (bool) => {

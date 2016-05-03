@@ -56,6 +56,7 @@ module.exports = function (PORT) {
           cb(false);
         }
       });
+      
 
       // let user check for reserved nicknameReserved
       socket.on('nicknameCheck', function (name, room, cb) {
@@ -71,6 +72,7 @@ module.exports = function (PORT) {
           cb(false);
         }
       });
+
 
       // When socket disconnects, remove it from the list:
       socket.on('disconnect', function() {

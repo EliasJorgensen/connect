@@ -30,15 +30,17 @@ module.exports = function (PORT) {
   // start websocket server
   var io = socketio(server, { path: '/api' });
 
-  // dummy room object for testing purposes
-  var rooms = {
-    testroom: {
-      users: [
-        "Elias",
-        "Aksel",
-      ]
-    }
-  };
+  // object structure visualization
+  // var rooms = {
+  //   testroom: {
+  //     users: [
+  //       "Elias",
+  //       "Aksel",
+  //     ]
+  //   }
+  // };
+
+  // our local 'database' of rooms and users
 
   io.on('connection', function(socket) {
       console.info('New client connected (id=' + socket.id + ').');

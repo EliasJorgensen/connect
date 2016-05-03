@@ -10,5 +10,6 @@ export const SET_NICKNAME_RESERVED = 'SET_NICKNAME_RESERVED';
 export const SET_NICKNAME_DISABLED = 'SET_NICKNAME_DISABLED';
 
 // room
-export const UPDATE_INPUT = 'UPDATE_INPUT';
-export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const SET_ROOM_NICKNAME     = 'SET_ROOM_NICKNAME';
+export const UPDATE_INPUT          = 'UPDATE_INPUT';
+export const SEND_MESSAGE          = 'SEND_MESSAGE';

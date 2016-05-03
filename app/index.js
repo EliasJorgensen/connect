@@ -16,13 +16,10 @@ import rootReducer from 'reducers';
 
 // create store from reducers and middleware
 let socket = io({path: '/api'});
-console.log(socket);
 let socketMiddleware = createSocketMiddleware(socket, 'api/');
-console.log(socketMiddleware);
 let store = applyMiddleware(routerMiddleware(hashHistory),
             thunk, socketMiddleware)(createStore)(rootReducer);
 
-console.log(store);
 console.info('State of store is:', store.getState());
 
 // create an enhanced history that syncs navigation events with the store

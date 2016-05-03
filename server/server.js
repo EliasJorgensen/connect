@@ -34,8 +34,16 @@ module.exports = function (PORT) {
   let rooms = {
     testroom: {
       users: [
-        "Elias",
-        "Aksel",
+        {
+          nickname: "Elias",
+          uuid: "110ec58a-a0f2-4ac4-8393-c866d813b8d1",
+          socketId: "/#7B_0VrosURHjPUdoAAAA"
+        },
+        {
+          nickname: "Aksel",
+          uuid: "6c84fb90-12c4-11e1-840d-7b25c5ee775a",
+          socketId: "/#l8nmJ7ngR6UYznDEAAAC"
+        }
       ]
     }
   };
@@ -51,7 +59,7 @@ module.exports = function (PORT) {
         console.log(action);
 
         if (action.type === 'api/roomCheck') {
-          let room = action.room.toLowerCase();
+          let room = action.room;
           let value;
 
           if (room in rooms) {
@@ -64,9 +72,10 @@ module.exports = function (PORT) {
           socket.emit('action', {type: 'SET_ROOM_RESERVED', value: value});
         }
 
+        // check if nickname is available in room
         else if (action.type === 'api/nicknameCheck') {
-          let room = action.room.toLowerCase();
-          let name = action.name;
+          let room     = action.room;
+          let nickname = action.nickname;
           let value;
 
           // if room doesn't exist, nickname is free to use
@@ -75,7 +84,7 @@ module.exports = function (PORT) {
             return;
           }
 
-          if (utils.searchArrayLowerCase(rooms[room]["users"], name)) {
+          if (utils.searchArrayLowerCase(rooms[room]["users"], nickname)) {
             value = true;
           } else {
             value = false;
@@ -84,6 +93,35 @@ module.exports = function (PORT) {
           // emit value back to client
           console.log("Checking Nickname: ", value);
           socket.emit('action', {type: 'SET_NICKNAME_RESERVED', value: value});
+        }
+
+        // join room and create it if needed
+        else if (action.type === 'api/joinRoom') {
+          let room      = action.room;
+          let nickname  = action.nickname;
+          let uuid      = action.id;
+
+          // if room exists, join room
+          if (room in rooms) {
+            // notify other users in room
+            for (let i in rooms[room]['users']) {
+              let id = rooms[room]['users'][i]['socketId'];
+              socket.broadcast.to(id).emit('action',
+                    {type: 'ADD_USER_TO_ROOM', nickname: nickname, uuid: uuid});
+            }
+
+            // add user to local database
+            rooms[room]['users'].push({nickname: nickname, uuid: uuid, socketId: socket.id});
+            console.log('Users in selected room are: \n', rooms[room]['users']);
+          }
+
+          // if it doesn't create one
+          else {
+            rooms[room] = {};
+            rooms[room]['users'] = [];
+            rooms[room]['users'].push({nickname: nickname, uuid: uuid, socketId: socket.id});
+            console.log('Users in selected room are: \n', rooms[room]['users']);
+          }
         }
 
       });

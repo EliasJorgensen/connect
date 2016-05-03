@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import * as actions from 'actions';
 
 // import presentational component
@@ -24,8 +23,8 @@ class PromptContainer extends Component {
 
     console.log("Form submitted:", room, nickname);
 
-    // push user to Room route
-    this.props.actions.pushToRoute('/room/' + room);
+    // join room
+    this.props.actions.joinRoom(room, nickname);
   }
 
   // handle update of Room input field (also check nickname)
@@ -120,9 +119,10 @@ function mapDispatchToProps(dispatch) {
       checkRoom: (room) => {
         dispatch(actions.asyncCheckRoom(room));
       },
-      pushToRoute: (route) => {
-        dispatch(push(route));
+      joinRoom: (room, nickname) => {
+        dispatch(actions.asyncJoinRoom(room, nickname));
       },
+
     }
   };
 }

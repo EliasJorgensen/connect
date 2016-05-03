@@ -1,5 +1,5 @@
 # Connect
-Connect is a minimalistic, non distracting, chat web-app made with React and Socket.io
+Connect is a minimalistic, non distracting, chat web-app - made with React, Redux and Socket.io
 
 It makes use of the following technologies:
 

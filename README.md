@@ -20,7 +20,7 @@ It makes use of the following technologies:
 
 ## Get started
 1. [**Initial Machine Setup**](https://github.com/EliasJorgensen/connect#initial-machine-setup). Only do this if you haven't used NodeJS before.
-2. **Clone the repo** (or download a zip). `git clone https://github.com/EliasJorgensen/connect.git`.
+2. **Clone the repo** (or [download a zip](https://github.com/EliasJorgensen/connect/archive/master.zip)). `git clone https://github.com/EliasJorgensen/connect.git`.
 3. **Navigate** to the cloned repository from a terminal/command prompt.
 4. **Install Dependencies**. `npm install` from the cloned directory.
 5. **Run the web-app**. `npm start`.

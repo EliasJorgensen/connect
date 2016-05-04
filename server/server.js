@@ -115,7 +115,7 @@ module.exports = function (PORT) {
             console.log('Users in selected room are: \n', rooms[room]['users']);
           }
 
-          // if it doesn't create one
+          // if it doesn't, create one
           else {
             rooms[room] = {};
             rooms[room]['users'] = [];

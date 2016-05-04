@@ -15,7 +15,7 @@ It makes use of the following technologies:
 | [Socket.io](http://socket.io/) | Enables real-time bidirectional event-based communication. |
 
 ## Initial Machine Setup
-1. **Install the newest version of [NodeJS](https://nodejs.org)**.
+1. **Install the newest version of [NodeJS](https://nodejs.org) (6.0.0 minimum)**.
 2. [Optional] **Install [Git](https://git-scm.com/downloads)**.
 
 ## Get started

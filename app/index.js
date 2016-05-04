@@ -17,8 +17,13 @@ import rootReducer from 'reducers';
 // create store from reducers and middleware
 let socket = io({path: '/api'});
 let socketMiddleware = createSocketMiddleware(socket, 'api/');
-let store = applyMiddleware(routerMiddleware(hashHistory),
-            thunk, socketMiddleware)(createStore)(rootReducer);
+let store = createStore(
+  rootReducer,
+  applyMiddleware(
+    routerMiddleware(hashHistory),
+    thunk, socketMiddleware
+  )
+);
 
 console.info('State of store is:', store.getState());
 

@@ -13,8 +13,7 @@ class UserList extends Component {
 
     var userNodes;
 
-    if (typeof this.props.users !== 'undefined') {
-      console.log('mapping userlist');
+    if (this.props.users.length > 0) {
       userNodes = this.props.users.map(user => {
         return (
           <ListItem

@@ -99,7 +99,7 @@ module.exports = function (PORT) {
         else if (action.type === 'api/joinRoom') {
           let room      = action.room;
           let nickname  = action.nickname;
-          let id      = action.id; // UUID not socketId
+          let id        = action.id; // UUID not socketId
 
           // if room exists, join room
           if (room in rooms) {
@@ -126,6 +126,25 @@ module.exports = function (PORT) {
             rooms[room]['users'] = []; // users is an array
             rooms[room]['users'].push({nickname: nickname, id: id, socketId: socket.id}); // add user to array
             console.log('Users in selected room are: \n', rooms[room]['users']);
+          }
+        }
+
+        // if a user sends a message
+        else if (action.type === 'api/sendMessage') {
+          let socketId = socket.id;
+          console.log(action.room);
+          let users = rooms[action.room]['users'];
+
+          for (let i in users) {
+            let userId = users[i]['socketId'];
+            // only send the message to the other users, as
+            // the user sending the message is also a part
+            // of the users array
+            if (socketId === userId) {continue;}
+
+            console.log("Message: ", action.message, " - sent to: ", userId);
+            socket.broadcast.to(userId).emit('action', {type: 'RECEIVE_MESSAGE',
+                  message: action.message});
           }
         }
 

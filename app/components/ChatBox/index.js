@@ -14,7 +14,7 @@ class ChatBox extends Component {
       return (
         <ChatMessage
         message={message}
-        key={message.key} />
+        key={message.id} />
       );
     });
 

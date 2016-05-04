@@ -13,15 +13,21 @@ const Room = (props) => (
         header="Users in room"
         users={props.users}
         nickname={props.nickname} />
-      <ChatInput />
+      <ChatInput
+        input={props.input}
+        updateInput={props.updateInput}
+        sendMessage={props.sendMessage} />
     </div>
   </main>
 );
 
 Room.propTypes = {
-  nickname: PropTypes.object.isRequired,
-  users:    PropTypes.array,
-  messages: PropTypes.array
+  nickname:    PropTypes.object.isRequired,
+  input:       PropTypes.string.isRequired,
+  updateInput: PropTypes.func.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  users:       PropTypes.array,
+  messages:    PropTypes.array,
 };
 
 export default Room;

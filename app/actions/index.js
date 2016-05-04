@@ -51,7 +51,19 @@ export function asyncJoinRoom (room, nickname) {
   }
 }
 
+export function asyncSendMessage (message, room) {
+  message.id = uuid.v4();
+  message.timestamp = new Date();
 
+  // send message, add it to users messages and reset input field
+  console.log("Message is: ", message);
+  console.log("Room is: ", room);
+  return (dispatch) => {
+    dispatch({type: 'api/sendMessage', message: message, room: room});
+    dispatch({type: 'RECEIVE_MESSAGE', message: message});
+    dispatch({type: 'UPDATE_INPUT', input: ''});
+  }
+}
 
 /*------------------ Synchronous action creators ------------------*/
 
@@ -73,4 +85,8 @@ export function setNicknameError (bool) {
 
 export function setNicknameDisabled (bool) {
   return { type: types.SET_NICKNAME_DISABLED, value: bool };
+}
+
+export function updateInput (input) {
+  return { type: types.UPDATE_INPUT, input: input };
 }

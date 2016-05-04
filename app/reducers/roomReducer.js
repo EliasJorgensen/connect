@@ -1,4 +1,4 @@
-import { SET_ROOM_NICKNAME, ADD_USER_TO_ROOM } from 'constants/actionTypes';
+import { SET_ROOM_NICKNAME, ADD_USER_TO_ROOM, UPDATE_INPUT, RECEIVE_MESSAGE } from 'constants/actionTypes';
 
 const initialState = {
   nickname: {},
@@ -29,6 +29,21 @@ export default function roomReducer(state = initialState, action) {
             nickname: action.nickname,
             id:       action.id
           },
+        ]
+      });
+
+    case UPDATE_INPUT:
+      console.log("Input is: ", action.input);
+      return Object.assign({}, state, {
+        input: action.input
+      });
+
+    case RECEIVE_MESSAGE:
+      console.log("Receiving message from: ", action.message.author);
+      return Object.assign({}, state, {
+        messages: [
+          ...state.messages,
+          action.message
         ]
       });
 

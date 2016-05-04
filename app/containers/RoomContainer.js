@@ -1,49 +1,45 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import * as actions from 'actions';
 
 // import component
 import Room from 'components/Room';
 
-// test array
-let users = [
-  {
-    nickname:'Elias',
-    id: 1
-  },
-  {
-    nickname:'Someone',
-    id: 2
-  },
-  {
-    nickname:'Aksel',
-    id: 3
-  },
-];
-
-// test array
-let msg = [
-  {
-    date: new Date(),
-    content: 'Test Content right here bruh',
-    author: 'Elias',
-    key: 1
-  },
-  {
-    date: new Date(),
-    content: 'This is some neat stuff right here',
-    author: 'Aksel',
-    key: 2
-  }
-];
-
 class RoomContainer extends Component {
+
+  // if user has no nickname, send then back to the prompt
+  componentWillMount () {
+    // if nickname object has no keys, push to root route
+    if (Object.keys(this.props.state.nickname).length  === 0) {
+      console.log("Kicking user to root.");
+      this.props.pushToRoot();
+    }
+  }
+
+  // dispatch sendServer action
+  handleSendMessage (e) {
+    // prevent form from using the default blocking submit
+    e.preventDefault();
+
+    const { input } = this.props.state;
+
+    // cancel message, if input field is empty
+    if (input === '') {return;}
+
+    this.props.sendMessage({content: input,
+        author: this.props.state.nickname.nickname}, this.props.room);
+  }
+
   render () {
     return (
       <Room
-      room={this.props.room}
       nickname={this.props.state.nickname}
       users={this.props.state.users}
-      messages={msg} />
+      input={this.props.state.input}
+      updateInput={(e) => this.props.updateInput(e.target.value)}
+      sendMessage={(e) => this.handleSendMessage(e)}
+      messages={this.props.state.messages} />
     )
   }
 }
@@ -57,7 +53,15 @@ function mapStateToProps (state, ownProps) {
 
 function mapDispatchToProps (dispatch) {
   return {
-
+    updateInput: (value) => {
+      dispatch(actions.updateInput(value));
+    },
+    sendMessage: (input, room) => {
+      dispatch(actions.asyncSendMessage(input, room));
+    },
+    pushToRoot: () => {
+      dispatch(push('/'));
+    }
   };
 }
 

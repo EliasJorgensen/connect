@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ListItem from 'material-ui/lib/lists/list-item';
 
-import './index.css';
+require('./index.css');
 
 class ChatMessage extends Component {
 
@@ -9,8 +9,8 @@ class ChatMessage extends Component {
 
     // configure formatting
     let msg = this.props.message;
-    let hours = msg.date.getHours();
-    let minutes = msg.date.getMinutes();
+    let hours = new Date(msg.timestamp).getHours();
+    let minutes = new Date(msg.timestamp).getMinutes();
     hours = (hours < 9) ? '0' + hours : hours;
     minutes = (minutes < 9) ? '0' + minutes : minutes;
 

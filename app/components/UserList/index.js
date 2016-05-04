@@ -11,23 +11,36 @@ class UserList extends Component {
 
   render () {
 
-    let userNodes = this.props.users.map(user => {
-      return (
-        <ListItem
-          primaryText={user.nickname}
-          disabled={true}
-          leftIcon={<PersonIcon style={{ fill: green500}} />}
-          key={user.id}
-        />
-      );
-    });
+    var userNodes;
+
+    if (typeof this.props.users !== 'undefined') {
+      console.log('mapping userlist');
+      userNodes = this.props.users.map(user => {
+        return (
+          <ListItem
+            primaryText={user.nickname}
+            disabled={true}
+            leftIcon={<PersonIcon style={{ fill: green500}} />}
+            key={user.id}
+          />
+        );
+      });
+    }
 
     return (
       <Paper className="user-list" rounded={false}>
         <List>
           <Subheader>{this.props.header}</Subheader>
 
-          {userNodes}
+        {/* Insert users nickname in the top */}
+          <ListItem
+            primaryText={this.props.nickname.nickname}
+            disabled={true}
+            leftIcon={<PersonIcon style={{ fill: green500}} />}
+            key={this.props.nickname.id}
+          />
+
+        {userNodes}
 
         </List>
       </Paper>
@@ -37,8 +50,9 @@ class UserList extends Component {
 }
 
 UserList.propTypes = {
-  header: PropTypes.string.isRequired,
-  users:  PropTypes.array.isRequired,
+  header:   PropTypes.string.isRequired,
+  users:    PropTypes.array,
+  nickname: PropTypes.object.isRequired
 };
 
 export default UserList;

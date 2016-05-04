@@ -41,8 +41,8 @@ class RoomContainer extends Component {
     return (
       <Room
       room={this.props.room}
-      nickname={this.props.nickname}
-      users={users}
+      nickname={this.props.state.nickname}
+      users={this.props.state.users}
       messages={msg} />
     )
   }
@@ -50,8 +50,8 @@ class RoomContainer extends Component {
 
 function mapStateToProps (state, ownProps) {
   return {
-    nickname: state.prompt.nickname,
-    room:     ownProps.params.id,
+    room:  ownProps.params.id,
+    state: state.room
   };
 }
 

@@ -14,13 +14,11 @@ utils.searchArrayLowerCase = function (arr, str) {
   // convert array content to lowercase and search for string
   for (var i = 0; i < arr.length; i++) {
     if (arr[i]['nickname'].toLowerCase() === str) {
-      console.info("Found");
       return true;
     }
   }
 
   // if not Found
-  console.info("Nope");
   return false;
 }
 

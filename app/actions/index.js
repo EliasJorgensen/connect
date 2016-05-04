@@ -41,7 +41,7 @@ export function asyncCheckNickname (nickname, room) {
 // join room
 export function asyncJoinRoom (room, nickname) {
   room = room.toLowerCase();
-  let id = uuid.v4();
+  let id = uuid.v4(); // create unique identifier
 
   // join room, set the final nickname and push to room route
   return (dispatch) => {

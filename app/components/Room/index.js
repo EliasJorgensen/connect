@@ -8,21 +8,20 @@ import ChatInput from 'components/ChatInput';
 const Room = (props) => (
   <main>
     <div>
-
       <ChatBox messages={props.messages} />
       <UserList
         header="Users in room"
-        users={props.users} />
+        users={props.users}
+        nickname={props.nickname} />
       <ChatInput />
     </div>
   </main>
 );
 
 Room.propTypes = {
-  room:     PropTypes.string.isRequired,
-  nickname: PropTypes.string.isRequired,
-  users:    PropTypes.array.isRequired,
-  messages: PropTypes.array.isRequired
+  nickname: PropTypes.object.isRequired,
+  users:    PropTypes.array,
+  messages: PropTypes.array
 };
 
 export default Room;

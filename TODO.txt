@@ -1,2 +1,1 @@
 Document code with DocBlocks.
-Component key values on messages and users should be a UUID.

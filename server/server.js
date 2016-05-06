@@ -99,16 +99,18 @@ module.exports = function (PORT) {
         else if (action.type === 'api/joinRoom') {
           let room      = action.room;
           let nickname  = action.nickname;
-          let id        = action.id; // UUID not socketId
+          let uuid        = action.id; // UUID not socketId
 
           // if room exists, join room
           if (room in rooms) {
             // notify other users in room, and send userlist to connecting user
             for (let i in rooms[room]['users']) {
               let id = rooms[room]['users'][i]['socketId'];
+
               // notify users in chatroom
               socket.broadcast.to(id).emit('action',
-                    {type: 'ADD_USER_TO_ROOM', nickname: nickname, id: id});
+                    {type: 'ADD_USER_TO_ROOM', nickname: nickname, id: uuid});
+
               // send userlist to connecting user
               socket.emit('action', {type: 'ADD_USER_TO_ROOM',
                     nickname: rooms[room]['users'][i]['nickname'],
@@ -116,15 +118,15 @@ module.exports = function (PORT) {
             }
 
             // add user to local database
-            rooms[room]['users'].push({nickname: nickname, id: id, socketId: socket.id});
+            rooms[room]['users'].push({nickname: nickname, id: uuid, socketId: socket.id});
             console.log('Users in selected room are: \n', rooms[room]['users']);
           }
 
           // if it doesn't, create one
           else {
             rooms[room] = {}; // room is an object
-            rooms[room]['users'] = []; // users is an array
-            rooms[room]['users'].push({nickname: nickname, id: id, socketId: socket.id}); // add user to array
+            rooms[room]['users'] = []; // 'users' is an array
+            rooms[room]['users'].push({nickname: nickname, id: uuid, socketId: socket.id}); // add user to array
             console.log('Users in selected room are: \n', rooms[room]['users']);
           }
         }
@@ -151,9 +153,55 @@ module.exports = function (PORT) {
       });
 
 
-      // When socket disconnects, remove it from the list:
+      // When socket disconnects, remove it from the room.
+      // If disconnecting user is the last one in the room, delete it.
       socket.on('disconnect', function() {
           console.info('Client gone (id=' + socket.id + ').');
+
+          let user;
+
+          // find out what room the user is in.
+          for (let i in rooms) {
+            // if disconnecting user has been found and removed,
+            // stop searching rooms
+            if (typeof user !== 'undefined') {break;}
+
+            for (let j in rooms[i]['users']) {
+
+              if (rooms[i]['users'][j]['socketId'] === socket.id) {
+                console.log("Removing user with socket ID ", socket.id);
+
+                // save the disconnect user of the room
+                user = rooms[i]['users'][j];
+                console.log("Disconnecting user: ", user);
+
+                // notify other users in the room, that a user is disconneting
+                for (let k in rooms[i]['users']) {
+                  let userId = rooms[i]['users'][k]['socketId'];
+                  // skip the disconneting user
+                  if (socket.id === userId) {continue;}
+
+                  socket.broadcast.to(userId).emit('action',
+                  {type: 'REMOVE_USER_FROM_ROOM', id: user.id});
+                }
+
+                // now delete the user from the room
+                let userIndex = j; // the index of our 'users' loop
+                rooms[i]['users'].splice(userIndex, 1);
+                console.log("Remaining users in room: ", rooms[i]['users']);
+
+                // if disconnecting user was the last one in the room, delete the room
+                if (Object.keys(rooms[i]['users']).length  === 0) {
+                  console.log("Deleting room: ", rooms[i]);
+                  delete rooms[i];
+                }
+
+                console.log("Rooms: ", rooms);
+              }
+
+            }
+          }
+
       });
   });
 

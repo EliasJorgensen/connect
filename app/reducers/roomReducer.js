@@ -1,4 +1,4 @@
-import { SET_ROOM_NICKNAME, ADD_USER_TO_ROOM, UPDATE_INPUT, RECEIVE_MESSAGE } from 'constants/actionTypes';
+import { SET_ROOM_NICKNAME, ADD_USER_TO_ROOM, UPDATE_INPUT, RECEIVE_MESSAGE, REMOVE_USER_FROM_ROOM } from 'constants/actionTypes';
 
 const initialState = {
   nickname: {},
@@ -44,6 +44,18 @@ export default function roomReducer(state = initialState, action) {
         messages: [
           ...state.messages,
           action.message
+        ]
+      });
+
+    case REMOVE_USER_FROM_ROOM:
+      console.log("REMOVING USER", action);
+      // find the index of the user with the provided ID
+      let index = state.users.findIndex(prop => prop.id === action.id);
+      console.log("Users", state.users);
+      return Object.assign({}, state, {
+        users: [
+          ...state.users.slice(0, index),
+          ...state.users.slice(index + 1)
         ]
       });
 

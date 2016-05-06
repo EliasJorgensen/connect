@@ -1,8 +1,9 @@
 Document code with DocBlocks.
-When user disconnects, remove from room. If user only one one left in room, delete room.
 When user refreshes window, remain in chat room.
 Warn on leave.
 
 ----- KNOWN ISSUES -----
 When user presses the back button, session persists.
 devServer hangs, when handling more than one session.
+
+Socket hangs up, when a user leaves (only happens in dev mode. Problem with webpack-dev-server).

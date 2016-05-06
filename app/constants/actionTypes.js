@@ -15,3 +15,4 @@ export const UPDATE_INPUT          = 'UPDATE_INPUT';
 export const SEND_MESSAGE          = 'SEND_MESSAGE';
 export const RECEIVE_MESSAGE       = 'RECEIVE_MESSAGE';
 export const ADD_USER_TO_ROOM      = 'ADD_USER_TO_ROOM';
+export const REMOVE_USER_FROM_ROOM = 'REMOVE_USER_FROM_ROOM';

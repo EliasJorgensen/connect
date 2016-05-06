@@ -10,7 +10,7 @@ const Room = (props) => (
     <div>
       <ChatBox messages={props.messages} />
       <UserList
-        header="Users in room"
+        header={"Users in " + props.room}
         users={props.users}
         nickname={props.nickname} />
       <ChatInput
@@ -26,6 +26,7 @@ Room.propTypes = {
   input:       PropTypes.string.isRequired,
   updateInput: PropTypes.func.isRequired,
   sendMessage: PropTypes.func.isRequired,
+  room:        PropTypes.string.isRequired,
   users:       PropTypes.array,
   messages:    PropTypes.array,
 };

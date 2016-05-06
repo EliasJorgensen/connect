@@ -35,7 +35,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "dist": "webpack -p",
+    "dist": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "start": "node startServer.js"
   },
   "repository": {

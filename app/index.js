@@ -14,8 +14,9 @@ import RoomContainer from 'containers/RoomContainer';
 
 import rootReducer from 'reducers';
 
+// create socket connection
+let socket = io({path: '/api', 'forceNew': true});
 // create store from reducers and middleware
-let socket = io({path: '/api'});
 let socketMiddleware = createSocketMiddleware(socket, 'api/');
 let store = createStore(
   rootReducer,

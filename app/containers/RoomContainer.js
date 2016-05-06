@@ -39,7 +39,8 @@ class RoomContainer extends Component {
       input={this.props.state.input}
       updateInput={(e) => this.props.updateInput(e.target.value)}
       sendMessage={(e) => this.handleSendMessage(e)}
-      messages={this.props.state.messages} />
+      messages={this.props.state.messages}
+      room={this.props.room} />
     )
   }
 }

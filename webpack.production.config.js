@@ -40,7 +40,6 @@ module.exports = {
     }),
     new ExtractTextPlugin('app.css'),
     HTMLWebpackPluginConfig,
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
